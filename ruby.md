@@ -130,3 +130,53 @@ Hi Betty!
 => nil
 ```
 attr_accessorを使うと2つの新しいメソッドが定義されます。 nameは値を参照するメソッドで、name=は値を設定するメソッドです。
+
+# サイクルとループ - 別名: イテレーション
+```
+@names.each do |name|
+  puts "Hello #{name}!"
+end
+```
+
+```
+# Say bye to everybody
+def say_bye
+  if @names.nil?
+    puts "..."
+  elsif @names.respond_to?("join")
+    # Join the list elements with commas
+    puts "Goodbye #{@names.join(", ")}.  Come back soon!"
+  else
+    puts "Goodbye #{@names}.  Come back soon!"
+  end
+```
+say_byeメソッドはeachを使いません。その代わり、@namesがjoinメソッドを 処理できるかをチェックしています。もし処理できることがわかれば、それを使います。 そうでなければ、変数の値を文字列として出力します。 このメソッドは実際の変数の型を意識せず、サポートしているメソッドに頼っています。 これは“Duck Typing”という名前で知られている、「もしアヒルのように歩き、 アヒルのように鳴くものは……」というものです。この方法の良いところは、 対応する変数の型に不要な制約を課さずにすむことです。 もし誰かが新たな種類のリストクラスを持ち出してくれば、 joinメソッドが他のリストと同様の意味を持っている限り、 すべては期待した通り動きます。
+
+# スクリプトの実行
+`if __FILE__ == $0`
+__FILE__ は現在のファイル名を返す特別な変数です。 $0はプログラムを実行するときに使われるファイル名です。 このチェックは、「もしこれがメインファイルとして実行されているならば……」 という意味になります。 これは、ライブラリとして使われる場合には実行されないけれど、 実行ファイルとして使われる場合には実行されるコードを書くために 使われます。
+
+例)
+```
+if __FILE__ == $0
+  mg = MegaGreeter.new
+  mg.say_hi
+  mg.say_bye
+
+  # Change name to be "Zeke"
+  mg.names = "Zeke"
+  mg.say_hi
+  mg.say_bye
+
+  # Change the name to an array of names
+  mg.names = ["Albert", "Brenda", "Charles",
+              "Dave", "Engelbert"]
+  mg.say_hi
+  mg.say_bye
+
+  # Change to nil
+  mg.names = nil
+  mg.say_hi
+  mg.say_bye
+end
+```
