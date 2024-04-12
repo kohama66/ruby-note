@@ -734,3 +734,53 @@ unless num < 10 then
   puts "BIG"
 end
 ```
+
+# ～のあいだ(while, do)
+```
+while expr [do]
+  expression...
+end
+```
+while は「～のあいだ」を意味します。下記の例では、i の値が 10よりも小さい間 i の値を表示します。do は省略可能です。
+```
+i = 0
+while i < 10 do
+  puts i
+  i += 1
+end
+```
+
+# ～になるまでのあいだ(until, do)
+until は「～になるまでのあいだ」を意味します。下記の例では、i の値が 10よりも大きくなるまでの間 i の値を表示します。do は省略可能です
+```
+i = 0
+until i > 10 do
+  puts i
+  i += 1
+end
+```
+
+# ～のあいだ(for, in, do)
+```
+for var[, var]... in expr [do]
+  expression...
+end
+```
+for は配列の各要素に対して処理を繰り返します。do は省略可能です。
+
+```
+for i in [1, 2, 3] do
+  puts i                  #=> 1, 2, 3
+end
+
+for i in 1..10 do
+  puts i                  #=> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+end
+```
+
+ただし、Ruby では for 文を使用することはあまりなく、下記の様なイテレータを使用するのが一般的です。
+```
+10.times do |i|
+  puts i
+end
+```
