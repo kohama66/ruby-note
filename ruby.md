@@ -784,3 +784,53 @@ end
   puts i
 end
 ```
+
+# ～の場合(case, when)
+case, when, else は、値によって処理を振り分けます。次の例では、num の値が 1～3 の場合は SMALL、4～6 の場合は NORMAL、その他の場合は BIG を表示します。then は省略可能です。
+```
+num = 4
+case num
+when 1..3 then
+  puts "SMALL"
+when 4..6 then
+  puts "NORMAL"
+else
+  puts "BIG"
+end
+```
+
+# ループを抜ける(break)
+break は最も内側の while, until, for などのループ処理を抜けます。下記の例では、i が 5の時に forループを抜けます。
+```
+for i in 1..10
+  if i == 5 then
+    break
+  end
+  puts i                 #=> 1, 2, 3, 4
+end
+```
+
+# ループを繰り返す(next)
+next は while, until, for などのループ処理において、残りの処理をスキップして次のループを始めます。次の例では、i が 5の時のみ、puts を実行しません。
+```
+for i in 1..10
+  if i == 5 then
+    next
+  end
+  puts i              #=> 1, 2, 3, 4, 6, 7, 8, 9, 10
+end
+```
+
+# ループを繰り返す(redo)
+redo も next と同様、ループを繰り返しますが、next がループの終了判断を行ってから処理を行うのに対し、redo は終了判断無しで処理を繰り返します。
+
+```
+i = 0
+while i < 5 do
+  i += 1
+  if i == 5 then
+    redo
+  end
+  puts i              #=> 1, 2, 3, 4, 6
+end
+```
